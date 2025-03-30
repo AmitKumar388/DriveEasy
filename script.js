@@ -42,3 +42,9 @@ function prevStep(step) {
   currentStep = step;
   showStep(currentStep);
 }
+
+document
+  .getElementById("searchcar")
+  .addEventListener("click", function () {
+    window.location.href = "searchcar.html";
+  });
