@@ -1,24 +1,44 @@
-// Function to toggle the login form
-function toggleLoginForm() {
-    let loginPopup = document.getElementById("loginPopup");
-    loginPopup.style.display = loginPopup.style.display === "block" ? "none" : "block";
-}
+let currentStep = 1;
 
-// Attach event listener to Login button
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".login").addEventListener("click", toggleLoginForm);
+// Open Popup
+document.getElementById("loginBtn").addEventListener("click", function () {
+  document.getElementById("popupContainer").style.display = "flex";
+  showStep(1);
 });
 
-// Handle login submission
-function handleLogin(event) {
-    event.preventDefault();
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+document.getElementById("registerBtn").addEventListener("click", function () {
+  document.getElementById("popupContainer").style.display = "flex";
+  showStep(2);
+});
 
-    if (username && password) {
-        alert("Login Successful!");
-        window.location.href = "dashboard.html"; // Redirect to dashboard or any other page
-    } else {
-        alert("Please enter valid credentials!");
-    }
+// Close Popup
+document.getElementById("closePopup").addEventListener("click", function () {
+  document.getElementById("popupContainer").style.display = "none";
+});
+
+// Background Click to Close
+window.addEventListener("click", function (event) {
+  if (event.target === document.getElementById("popupContainer")) {
+    document.getElementById("popupContainer").style.display = "none";
+  }
+});
+
+// Function to show specific step
+function showStep(step) {
+  document
+    .querySelectorAll(".step")
+    .forEach((el) => el.classList.remove("active"));
+  document.getElementById("step" + step).classList.add("active");
+}
+
+// Next Step
+function nextStep(step) {
+  currentStep = step;
+  showStep(currentStep);
+}
+
+// Previous Step
+function prevStep(step) {
+  currentStep = step;
+  showStep(currentStep);
 }
